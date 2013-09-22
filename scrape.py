@@ -96,41 +96,53 @@ def scrape_unit_info(unit_list):
 	for line in page_source:
 		data_buffer = data_buffer+line
 
+	unit_info_list = []
 
 	course_offer_regex = re.compile("<th>Courses unit offered in:</th>.*?<td>(.*?)</td>",re.I|re.M|re.S)
-	course_offer_results = course_offer_regex.findall(data_buffer)
+	unit_info_list.append(course_offer_regex.findall(data_buffer))
 
 	prereq_regex = re.compile("<th>Prerequisite\(s\):</th>.*?<td>(.*?)</td>",re.I|re.M|re.S)
-	prereq_results = prereq_regex.findall(data_buffer)
+	unit_info_list.append(prereq_regex.findall(data_buffer))
 	
 	antireq_regex = re.compile("<th>Antirequisite\(s\):</th>.*?<td>(.*?)</td>",re.I|re.M|re.S)
-	antireq_results = antireq_regex.findall(data_buffer)
+	unit_info_list.append(antireq_regex.findall(data_buffer))
 	
 	equiv_regex = re.compile("<th>Equivalent\(s\):</th>.*?<td>(.*?)</td>",re.I|re.M|re.S)
-	equiv_results = equiv_regex.findall(data_buffer)
+	unit_info_list.append(equiv_regex.findall(data_buffer))
 	
 	credit_regex = re.compile("<th>Credit points:</th>.*?<td>(.*?)</td>",re.I|re.M|re.S)
-	credit_results = credit_regex.findall(data_buffer)
+	unit_info_list.append(credit_regex.findall(data_buffer))
 	
 	campus_regex = re.compile("<th>Campus:</th>.*?<td>(.*?)</td>",re.I|re.M|re.S)
-	campus_results = campus_regex.findall(data_buffer)
+	unit_info_list.append(campus_regex.findall(data_buffer))
 	
 	study_period_regex = re.compile("<th>Teaching period:</th>.*?<td>(.*?)</td>",re.I|re.M|re.S)
-	study_period_results = study_period_regex.findall(data_buffer)
+	unit_info_list.append(study_period_regex.findall(data_buffer))
 
 	csp_regex = re.compile("<th>CSP student contribution</th>.*?<td>(.*?)</td>",re.I|re.M|re.S)
-	csp_results = csp_regex.findall(data_buffer)
+	unit_info_list.append(csp_regex.findall(data_buffer))
 
 	domestic_fee_regex = re.compile("<th>Domestic tuition unit fee</th>.*?<td>(.*?)</td>",re.I|re.M|re.S)
-	domestic_fee_results = domestic_fee_regex.findall(data_buffer)
+	unit_info_list.append(domestic_fee_regex.findall(data_buffer))
 
 	international_fee_regex = re.compile("<th>International unit fee</th>.*?<td>(.*?)</td>",re.I|re.M|re.S)
-	international_fee_results = international_fee_regex.findall(data_buffer)
+	unit_info_list.append(international_fee_regex.findall(data_buffer))
 	
 	synopsis_regex = re.compile("<H3>Synopsis:</H3>.*?<p>(.*?)</p>",re.I|re.M|re.S)
-	synopsis_results = synopsis_regex.findall(data_buffer)
+	unit_info_list.append(synopsis_regex.findall(data_buffer))
 
-	return [course_offer_results,prereq_results,antireq_results,equiv_results,credit_results,campus_results,study_period_results,csp_results,domestic_fee_results,international_fee_results,synopsis_results]
+	# This will probably work better idk why I didn't think of this the first time around.
+	# All of that up there is still a mess though.
+	for key,info_entry in enumerate(unit_info_list):
+		try:
+			info_entry[0]
+		except IndexError:
+			unit_info_list[key] = 0
+		else:
+			pattern = re.compile(r'&nbsp;+')
+			sentence = re.sub(pattern, ' ', info_entry[0])
+			unit_info_list[key] = sentence.strip()
+	return unit_info_list
 
 def dump_to_file(lists,names):
 
@@ -192,10 +204,12 @@ print "...Finished.\n"
 
 print "I hope you have a lot of time on your hands cause this'll take a few years."
 for i,unit in enumerate(unit_list):
-	print "\tScraping data for unit code %s (item %d of %d (%d %%))"%(unit[1],(i+1),len(unit_list),((i+1)/len(unit_list))*100)
+	print "\tScraping data for unit code %s (item %d of %d (%d %%))"%(unit[1],(i+1),len(unit_list),(float(i+1)/len(unit_list))*100) # Guess what should've been a float?
 	scraped_data = scrape_unit_info(unit)
 	print "\tData Collected. Adding %s..."%(unit[1])
 	with open('scraped_data.ohgodwhy','a') as dump_file:
 		dump_file.write("\t%sEOL\n"%(str(scraped_data)))
 	print "\tData dumped.\n"
+
+print "At long last my suffering is at an end."
 exit()
