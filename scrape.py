@@ -204,7 +204,7 @@ print "...Finished.\n"
 
 print "I hope you have a lot of time on your hands cause this'll take a few years."
 for i,unit in enumerate(unit_list):
-	print "\tScraping data for unit code %s (item %d of %d (%d %%))"%(unit[1],(i+1),len(unit_list),(float(i+1)/len(unit_list))*100) # Guess what should've been a float?
+	print "\tScraping data for unit code %s (item %d of %d (%f %%))"%(unit[1],(i+1),len(unit_list),(float(i+1)/len(unit_list))*100) # Guess what should've ACTUALLY been a float?
 	scraped_data = scrape_unit_info(unit)
 	print "\tData Collected. Adding %s..."%(unit[1])
 	with open('scraped_data.ohgodwhy','a') as dump_file:
