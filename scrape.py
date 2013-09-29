@@ -169,25 +169,25 @@ def dump_to_file(lists,names):
 # Test 1
 # expects:
 #['46436', 0, 0, 0, 0, 'An application, interview and subsequent approval by the Unit Coordinator is required to enrol in this unit. In addition to completion of the following units: AYN417  AYN418.', '12', 'Gardens Point', '2013 SEM-1 and 2013 SEM-2', '$1,224', '$2,544', '$3,072', 'This unit fosters learning through work related experience. Students will be given the opportunity to experience the work that is performed by accountants which will enable them to more effectively learn and practice accounting discipline knowledge and graduate capabilities. Admission to this unit is by application and subsequent approval by the unit coordinator. <br><br>For additional important information about this unit please refer to the current unit outline.']
-unit_info = scrape_unit_info(['46436', 'AYN460', 'http://www.qut.edu.au/study/unit-search/unit?idunit=46436'])
-print unit_info
-exit()
+# unit_info = scrape_unit_info(['46436', 'AYN460', 'http://www.qut.edu.au/study/unit-search/unit?idunit=46436'])
+# print unit_info
+# exit()
 
 
 # Test 2
 # expects:
 #['43713', 'BS92, IF49', 0, 0, 'GSN234', 0, '12', 'Gardens Point', '2013 SEM-1', '$1,224', '$2,544', '$3,072', 'The unit introduces the students to the field of entrepreneurship research and the problems, theories and methods that are prevalent in (empirical) research on entrepreneurship. Students learn to "know the field" including its historical development; its "infrastructure" of journals, conferences and research centres, and its contemporary research questions and approaches. The students will develop an ability to assess the strengths and weaknesses of the field and gain insights into where and how they can contribute to its research frontier.']
-unit_info = scrape_unit_info(['43713', 'MGN534', 'http://www.qut.edu.au/study/unit-search/unit?idunit=43713'])
-print unit_info
-exit()
+# unit_info = scrape_unit_info(['43713', 'MGN534', 'http://www.qut.edu.au/study/unit-search/unit?idunit=43713'])
+# print unit_info
+# exit()
 
 
 # Test 3
 # expects:
 #['45637', 0, 'BSB111 or CTB111', 'LWB364', 'AYB325, AYX219', 0, '12', 'Gardens Point', '2013 SEM-1 and 2013 SEM-2', '$1,224', '$2,136', '$2,868', "This unit introduces students to the statutory framework of the Australian taxation system. Elements in the determination of taxable income and the levy of income tax are examined including general and specific categories of assessable income and allowable deductions, capital gains tax and administration aspects of the tax system. The taxation of fringe benefits is also examined. The unit also provides  a brief overview of the taxation of partnerships, trusts and companies and an overview of the goods and services tax. Emphasis is placed on developing students' skills in problem solving through research and analysis of taxation issues."]
-unit_info = scrape_unit_info(['45637', 'AYB219', 'http://www.qut.edu.au/study/unit-search/unit?unitCode=AYB219&idunit=45637'])
-print unit_info
-exit()
+# unit_info = scrape_unit_info(['45637', 'AYB219', 'http://www.qut.edu.au/study/unit-search/unit?unitCode=AYB219&idunit=45637'])
+# print unit_info
+# exit()
 
 
 # And all this shit below is a horrible mess I just wanted it to work for now
